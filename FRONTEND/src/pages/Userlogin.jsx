@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { UserDataContext } from '../context/UserContext'
-// import { useNavigate } from 'react-router-dom'
-// import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const Userlogin = () => {
     const [email, setEmail] = useState('')
@@ -10,28 +10,29 @@ const Userlogin = () => {
     const [userData, setUserData] = useState({})
 
     const { user, setUser } = useContext(UserDataContext)
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
 
 
 
     const submitHandler = async (e) => {
         e.preventDefault();
-
         const userData = {
             email: email,
             password: password
         }
-        console.log(userData);
+        // console.log(userData);
 
 
-        // const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/login`, userData)
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/user/login`, userData)
 
-        // if (response.status === 200) {
-        //     const data = response.data
-        //     setUser(data.user)
-        //     localStorage.setItem('token', data.token)
-        //     navigate('/home')
-        // }
+        if (response.status === 200) {
+            const data = response.data;
+            setUser(data.user);
+            localStorage.setItem('token', data.token);
+            // console.log(data.user, data.token);
+            navigate('/home');
+        }
+
 
 
         setEmail('')
@@ -47,7 +48,9 @@ const Userlogin = () => {
                     alt="uber_logo"
                 />
 
-                <form className='w-full max-w-lg'>
+                <form onSubmit={(e) => {
+                    submitHandler(e)
+                }} className='w-full max-w-lg'>
                     <h3 className='text-lg font-medium mb-2'>What's your email</h3>
                     <input
                         required
