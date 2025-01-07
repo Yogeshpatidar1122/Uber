@@ -11,6 +11,8 @@ import UserLogout from './pages/UserLogout'
 import CaptainHome from './pages/CaptainHome'
 import CaptainLogout from './pages/CaptainLogout'
 import CaptainProtectWrapper from './pages/CaptainProtectWrapper'
+import CaptainRiding from './pages/CaptainRiding'
+import Riding from './pages/Riding'
 const hello = () => {
   return (
     <div>
@@ -19,8 +21,11 @@ const hello = () => {
         {/* route for user  */}
         <Route path='/login' element={<Userlogin />} />
         <Route path='/signup' element={<UserSignup />} />
+        <Route path='/riding' element={<Riding />} />
 
         {/* route for captain */}
+
+        <Route path='/captain-riding' element={<CaptainRiding />} />
         <Route path='/captain-login' element={<Captainlogin />} />
         <Route path='/captain-signup' element={<CaptainSignup />} />
 
